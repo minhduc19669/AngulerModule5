@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Gallery-Angular"
+    }
+  },
+  "defaultProject": "Gallery-Angular",
+  "cli": {
+    "analytics": false
+  }
 }
