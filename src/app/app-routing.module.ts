@@ -11,11 +11,11 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component:BookcreateComponent,
+    component: BookcreateComponent,
   },
   {
-    path: 'edit',
-    component:BookeditComponent,
+    path: 'edit/:id',
+    component: BookeditComponent,
   },
 ];
 

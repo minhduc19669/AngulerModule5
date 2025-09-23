@@ -1,24 +1,58 @@
 
-<a [routerLink]="['/','create']" class="link">Create</a>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">STT</th>
-      <th scope="col">Book Name</th>
-      <th scope="col">Author</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let book of booksList">
-    <tr>
-      <th scope="row">1</th>
-      <td>{{ book.title }}</td>
-      <td>{{ book.author }}</td>
-      <td>{{ book.description }}</td>
-      <td>
-        <a routerLink="edit" class="link">Edit</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="container">
+  <h2>Book Management</h2>
+  
+  <a [routerLink]="['/','create']" class="btn btn-primary mb-3">Create New Book</a>
+  
+  <div class="row">
+    <div class="col-md-8">
+      <h3>Books List</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Book Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of booksList; let i = index">
+            <th scope="row">{{ book.bookId }}</th>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.description }}</td>
+            <td>
+              <a [routerLink]="['/edit', book.bookId]" class="btn btn-sm btn-warning">Edit</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div *ngIf="!booksList || booksList.length === 0" class="alert alert-info">
+        No books found. <a [routerLink]="['/create']">Create the first book</a>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <h3>Quick Add Book</h3>
+      <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" formControlName="title" required>
+        </div>
+        <div class="mb-3">
+          <label for="author" class="form-label">Author</label>
+          <input type="text" class="form-control" id="author" formControlName="author" required>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" formControlName="description" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="bookForm.invalid">Add Book</button>
+      </form>
+    </div>
+  </div>
+</div>
 

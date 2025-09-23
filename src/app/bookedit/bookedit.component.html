@@ -1,1 +1,60 @@
-<p>bookedit works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2>Edit Book</h2>
+      
+      <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" *ngIf="book">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title *</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="title" 
+            formControlName="title"
+            [class.is-invalid]="bookForm.get('title')?.invalid && bookForm.get('title')?.touched">
+          <div class="invalid-feedback" *ngIf="bookForm.get('title')?.invalid && bookForm.get('title')?.touched">
+            Title is required.
+          </div>
+        </div>
+        
+        <div class="mb-3">
+          <label for="author" class="form-label">Author *</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="author" 
+            formControlName="author"
+            [class.is-invalid]="bookForm.get('author')?.invalid && bookForm.get('author')?.touched">
+          <div class="invalid-feedback" *ngIf="bookForm.get('author')?.invalid && bookForm.get('author')?.touched">
+            Author is required.
+          </div>
+        </div>
+        
+        <div class="mb-3">
+          <label for="description" class="form-label">Description *</label>
+          <textarea 
+            class="form-control" 
+            id="description" 
+            formControlName="description" 
+            rows="4"
+            [class.is-invalid]="bookForm.get('description')?.invalid && bookForm.get('description')?.touched"></textarea>
+          <div class="invalid-feedback" *ngIf="bookForm.get('description')?.invalid && bookForm.get('description')?.touched">
+            Description is required.
+          </div>
+        </div>
+        
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button type="button" class="btn btn-secondary me-md-2" (click)="onCancel()">Cancel</button>
+          <button type="submit" class="btn btn-primary" [disabled]="bookForm.invalid">Update Book</button>
+        </div>
+      </form>
+      
+      <div *ngIf="!book" class="text-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p>Loading book...</p>
+      </div>
+    </div>
+  </div>
+</div>
