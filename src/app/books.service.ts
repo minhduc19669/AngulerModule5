@@ -13,6 +13,9 @@ export class BooksService {
   getAll() {
     return this.httpClient.get<IBook[]>(this.apiUrl);
   }
+  getById(id: number) {
+    return this.httpClient.get<IBook>(`${this.apiUrl}/${id}`);
+  }
   createBook(book: IBook) {
     return this.httpClient.post(this.apiUrl, book);
   }
